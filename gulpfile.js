@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     karma = require('gulp-karma'),
     uglify = require('gulp-uglify'),
-    connect = require('gulp-connect');
+    connect = require('gulp-connect'),
+    less = require('gulp-less');
 
 var appPaths = [
   './src/js/app.js',
@@ -16,6 +17,10 @@ var vendorPaths = [
   './bower_components/angular/angular.js',
   './bower_components/angular-resource/angular-resource.js',
   './bower_components/angular-ui-router/release/angular-ui-router.js'
+];
+
+var stylesheetsPaths = [
+  './src/stylesheets/**/*.less',
 ];
 
 gulp.task('connect', function() {
@@ -50,11 +55,22 @@ gulp.task('scripts.templates', function() {
       .pipe(connect.reload());
 });
 
-gulp.task('build', ['scripts.vendor', 'scripts.app', 'scripts.templates']);
+gulp.task('scripts.stylesheets', function() {
+  gulp.src(stylesheetsPaths)
+      .pipe(less())
+      .pipe(gulp.dest('./dist/css'))
+      .pipe(connect.reload());
+});
+
+gulp.task('build', [
+  'scripts.vendor', 'scripts.app', 'scripts.templates', 'scripts.stylesheets'
+]);
 
 gulp.task('watch', function() {
   gulp.watch(appPaths, ['scripts.app']);
   gulp.watch(['./src/templates/*.html', './src/index.html'], ['scripts.templates']);
+
+  gulp.watch(stylesheetsPaths, ['scripts.stylesheets']);
 });
 
 gulp.task('default', ['build', 'watch', 'connect']);

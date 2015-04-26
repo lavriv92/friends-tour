@@ -1,5 +1,5 @@
 {
-  "name": "ng-tour",
+  "name": "friends-tour",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,6 +13,7 @@
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
     "gulp-karma": "0.0.4",
+    "gulp-less": "^3.0.3",
     "gulp-uglify": "^1.2.0",
     "gulp-watch": "^4.2.4"
   },
