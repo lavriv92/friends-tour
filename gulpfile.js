@@ -66,6 +66,10 @@ gulp.task('build', [
   'scripts.vendor', 'scripts.app', 'scripts.templates', 'scripts.stylesheets'
 ]);
 
+gulp.task('test', function() {
+
+});
+
 gulp.task('watch', function() {
   gulp.watch(appPaths, ['scripts.app']);
   gulp.watch(['./src/templates/*.html', './src/index.html'], ['scripts.templates']);
